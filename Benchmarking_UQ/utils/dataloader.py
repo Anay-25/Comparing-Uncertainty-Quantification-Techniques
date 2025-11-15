@@ -45,5 +45,9 @@ def get_svhn_loader(batch_size=128, img_size=224, tta=False):
 
 def get_tinyimagenet_loader(batch_size=128, img_size=224, tta=False):
     tfm = _tta_transform(img_size) if tta else _test_transform(img_size)
-    ds = datasets.ImageFolder(root='./data/tiny-imagenet-200/val', transform=tfm)
-    return DataLoader(ds, batch_size=batch_size, shuffle=False, num_workers=0)
+
+    root = "/content/tiny-imagenet-200/val_fixed"
+
+    ds = datasets.ImageFolder(root=root, transform=tfm)
+    return DataLoader(ds, batch_size=batch_size, shuffle=False, num_workers=2)
+
